@@ -10,7 +10,7 @@ attr_reader:name, :area, :id
   end
 
   def save
-    results = DB.exec("INSERT INTO doctors (name, specialty) VALUES ('#{@name}', '#{@area}') RETURNING id;")
+    results = DB.exec("INSERT INTO doctors (name, area_id) VALUES ('#{@name}', '#{@area}') RETURNING id;")
     @id = results.first["id"].to_i
   end
 
@@ -19,7 +19,7 @@ attr_reader:name, :area, :id
     results = DB.exec("SELECT * FROM doctors;")
     results.each do |result|
       current_name = result["name"]
-      current_area = result["specialty"]
+      current_area = result["area_id"].to_i
       current_id = result["id"].to_i
       new_doctor = Doctor.new(current_name, current_area, current_id)
       doctors << new_doctor
@@ -38,7 +38,6 @@ attr_reader:name, :area, :id
   def list_patients
     patients = []
     results = DB.exec("SELECT * FROM patients_doctors WHERE doctor_id = '#{@id}';")
-    # binding.pry
     results.each do |result|
       patient_id = result["patient_id"].to_i
       pat_results = DB.exec("SELECT * FROM patients WHERE id = #{patient_id};")
