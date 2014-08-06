@@ -1,3 +1,5 @@
+require 'pry'
+
 class Doctor
 attr_reader:name, :area, :id
 
@@ -27,6 +29,27 @@ attr_reader:name, :area, :id
 
   def ==(another_doctor)
     (self.name == another_doctor.name) && (self.area == another_doctor.area) && (self.id == another_doctor.id)
+  end
+
+  def add_patient(patient)
+    DB.exec("INSERT INTO patients_doctors (patient_id, doctor_id) VALUES ('#{patient.id}', '#{@id}');")
+  end
+
+  def list_patients
+    patients = []
+    results = DB.exec("SELECT * FROM patients_doctors WHERE doctor_id = '#{@id}';")
+    # binding.pry
+    results.each do |result|
+      patient_id = result["patient_id"].to_i
+      pat_results = DB.exec("SELECT * FROM patients WHERE id = #{patient_id};")
+      pat_results.each do |patient|
+        patient_name = patient['name']
+        patient_birthday = patient['birthday'].split(" ")[0]
+        new_patient = Patient.new(patient_name, patient_birthday, patient_id)
+        patients << new_patient
+      end
+    end
+    patients
   end
 end
 

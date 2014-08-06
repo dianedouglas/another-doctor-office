@@ -2,6 +2,7 @@ require 'rspec'
 require 'pg'
 require 'doctor'
 require 'patient'
+require 'pry'
 
 test_doctor = Doctor.new("Dr. Who", "Time Travel")
 test_patient = Patient.new("Dude", "1999-09-09")
@@ -30,9 +31,11 @@ describe Doctor do
     expect(Doctor.all).to eq [test_doctor]
   end
 
-  # it 'will add a patient to the doctor table' do
-  #   test_doctor.add_patient(test_patient)
-  #   expect(test_doctor.list_patients).to eq [test_patient]
-  # end
+  it 'will add a patient to the doctor table' do
+    test_patient.save
+    test_doctor.save
+    test_doctor.add_patient(test_patient)
+    expect(test_doctor.list_patients).to eq [test_patient]
+  end
 
 end
