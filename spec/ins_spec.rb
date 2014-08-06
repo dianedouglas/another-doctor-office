@@ -24,4 +24,8 @@ describe Ins do
     expect(test_ins.name).to eq 'Health Cross'
   end
 
+  it "saves the company into a list of companies" do
+    test_ins.save
+    expect(Ins.all).to eq [test_ins]
+  end
 end
