@@ -1,8 +1,11 @@
 require 'rspec'
 require 'pg'
 require 'doctor'
+require 'patient'
 
 test_doctor = Doctor.new("Dr. Who", "Time Travel")
+test_patient = Patient.new("Dude", "1999-09-09")
+
 DB = PG.connect({:dbname => 'doctors_office'})
 
 RSpec.configure do |config|
@@ -26,4 +29,10 @@ describe Doctor do
     test_doctor.save
     expect(Doctor.all).to eq [test_doctor]
   end
+
+  # it 'will add a patient to the doctor table' do
+  #   test_doctor.add_patient(test_patient)
+  #   expect(test_doctor.list_patients).to eq [test_patient]
+  # end
+
 end

@@ -1,7 +1,7 @@
 class Doctor
 attr_reader:name, :area, :id
 
-  def initialize (name, area, id=nil)
+  def initialize (name, area, id = nil)
     @name = name
     @area = area
     @id = id
@@ -28,7 +28,6 @@ attr_reader:name, :area, :id
   def ==(another_doctor)
     (self.name == another_doctor.name) && (self.area == another_doctor.area) && (self.id == another_doctor.id)
   end
-
 end
 
 
