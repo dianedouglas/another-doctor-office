@@ -1,4 +1,6 @@
-class Ins
+require 'table_butler'
+
+class Ins < Table_Butler
 attr_reader :name, :id
   def initialize(name, id = nil)
     @name = name
@@ -20,10 +22,6 @@ attr_reader :name, :id
       ins_company << current_ins_company
     end
     ins_company
-  end
-
-  def ==(another_ins)
-    (self.name == another_ins.name) && (self.id == another_ins.id)
   end
 
   def doctors

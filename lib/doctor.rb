@@ -1,6 +1,7 @@
 require 'pry'
+require 'table_butler'
 
-class Doctor
+class Doctor < Table_Butler
 attr_reader:name, :area, :id, :ins
 
   def initialize (name, area, ins, id = nil)
@@ -29,9 +30,9 @@ attr_reader:name, :area, :id, :ins
     doctors
   end
 
-  def ==(another_doctor)
-    (self.name == another_doctor.name) && (self.area == another_doctor.area) && (self.ins == another_doctor.ins) && (self.id == another_doctor.id)
-  end
+  # def ==(another_doctor)
+  #   (self.name == another_doctor.name) && (self.area == another_doctor.area) && (self.ins == another_doctor.ins) && (self.id == another_doctor.id)
+  # end
 
   def add_patient(patient)
     DB.exec("INSERT INTO patients_doctors (patient_id, doctor_id) VALUES ('#{patient.id}', '#{@id}');")

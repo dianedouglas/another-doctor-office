@@ -1,4 +1,6 @@
-class Patient
+require 'table_butler'
+
+class Patient < Table_Butler
 
 attr_reader:name, :birthday, :id
 
@@ -24,9 +26,5 @@ attr_reader:name, :birthday, :id
       patients << new_patient
     end
     patients
-  end
-
-  def == (another_patient)
-    (self.name == another_patient.name) && (self.birthday == another_patient.birthday) && (self.id == another_patient.id)
   end
 end

@@ -1,4 +1,6 @@
-class Area
+require 'table_butler'
+
+class Area < Table_Butler
   attr_reader:area, :id
 
   def initialize(area, id = nil)
@@ -21,10 +23,6 @@ class Area
       areas << current_area
     end
     areas
-  end
-
-  def ==(another_area)
-    (self.area == another_area.area) && (self.id == another_area.id)
   end
 
   def doctors
