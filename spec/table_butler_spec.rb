@@ -1,13 +1,13 @@
-# require 'rspec_helper'
+require 'rspec_helper'
 
-# describe Table_Butler do
-#   before do
-#     create_test_objects
-#   end
+describe Table_Butler do
+  before do
+    create_test_objects
+  end
 
-#   it('prints hello.') do
-#     expect(@test_doctor.test).to eq "Hello! I'm the table butler!"
-#   end
+  it "deletes a table class instance from the database" do
+    @test_doctor.delete
+    expect(Doctor.all).to eq []
+  end
 
-
-# end
+end

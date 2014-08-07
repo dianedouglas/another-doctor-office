@@ -3,7 +3,7 @@ require 'rubygems'
 require 'active_support/core_ext/string/inflections'
 
 class Table_Butler
-
+#This will work as long as your class attribute name is equal to your DB column name
   def save
     table_name = self.class.to_s.downcase.pluralize
     values = ""
@@ -43,6 +43,12 @@ class Table_Butler
       end
     end
     is_equal
+  end
+
+  def delete
+    table_name = self.class.to_s.downcase.pluralize
+    # to_delete = self.id
+    DB.exec("DELETE FROM #{table_name} WHERE id = #{self.id};")
   end
 
 end
