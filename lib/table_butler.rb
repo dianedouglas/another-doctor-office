@@ -1,11 +1,11 @@
 require 'pry'
+require 'rubygems'
+require 'active_support/core_ext/string/inflections'
+
 class Table_Butler
 
   def self.all
-    table_name = self.to_s.downcase + "s"
-    if table_name == "inss"
-      table_name = "ins"
-    end
+    table_name = self.to_s.downcase.pluralize
     class_instances = []
     results = DB.exec("SELECT * FROM #{table_name};")
     results.each do |result|
