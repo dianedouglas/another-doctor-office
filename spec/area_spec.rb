@@ -10,7 +10,7 @@ describe Area do
   end
 
   it "saves the area" do
-    expect(Area.all).to eq [@test_area]
+    expect(@test_area.all('areas', Area.new(nil, nil))).to eq [@test_area]
   end
 
   it "should return the doctor of a given area" do

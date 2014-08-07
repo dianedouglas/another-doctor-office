@@ -1,28 +1,16 @@
 require 'table_butler'
 
 class Area < Table_Butler
-  attr_reader:area, :id
+  attr_accessor:name, :id
 
-  def initialize(area, id = nil)
-    @area = area
+  def initialize(name, id = nil)
+    @name = name
     @id = id
   end
 
   def save
-    results = DB.exec("INSERT INTO areas (name) VALUES ('#{@area}') RETURNING id;")
+    results = DB.exec("INSERT INTO areas (name) VALUES ('#{@name}') RETURNING id;")
     @id = results.first['id'].to_i
-  end
-
-  def self.all
-    areas = []
-    results = DB.exec("SELECT * FROM areas;")
-    results.each do |result|
-      result_area = result['name']
-      result_id = result['id'].to_i
-      current_area = Area.new(result_area, result_id)
-      areas << current_area
-    end
-    areas
   end
 
   def doctors

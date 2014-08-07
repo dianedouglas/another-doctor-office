@@ -2,7 +2,7 @@ require 'table_butler'
 
 class Patient < Table_Butler
 
-attr_reader:name, :birthday, :id
+attr_accessor:name, :birthday, :id
 
   def initialize(name, birthday, id = nil)
     @name = name
@@ -13,18 +13,5 @@ attr_reader:name, :birthday, :id
   def save
     results = DB.exec("INSERT INTO patients (name, birthday) VALUES ('#{@name}', '#{@birthday}') RETURNING id;")
     @id = results.first["id"].to_i
-  end
-
-  def self.all
-    patients = []
-    results = DB.exec("SELECT * FROM patients;")
-    results.each do |result|
-      patient_name = result['name']
-      patient_birthday = result['birthday'].split(" ")[0]
-      patient_id = result['id'].to_i
-      new_patient = Patient.new(patient_name, patient_birthday, patient_id)
-      patients << new_patient
-    end
-    patients
   end
 end
