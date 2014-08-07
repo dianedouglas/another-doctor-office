@@ -1,16 +1,17 @@
 require 'pry'
 
 class Doctor
-attr_reader:name, :area, :id
+attr_reader:name, :area, :id, :ins
 
-  def initialize (name, area, id = nil)
+  def initialize (name, area, ins, id = nil)
     @name = name
     @area = area
     @id = id
+    @ins = ins
   end
 
   def save
-    results = DB.exec("INSERT INTO doctors (name, area_id) VALUES ('#{@name}', '#{@area}') RETURNING id;")
+    results = DB.exec("INSERT INTO doctors (name, area_id, ins_id) VALUES ('#{@name}', '#{@area}', '#{@ins}') RETURNING id;")
     @id = results.first["id"].to_i
   end
 
@@ -20,15 +21,16 @@ attr_reader:name, :area, :id
     results.each do |result|
       current_name = result["name"]
       current_area = result["area_id"].to_i
+      current_ins = result["ins_id"].to_i
       current_id = result["id"].to_i
-      new_doctor = Doctor.new(current_name, current_area, current_id)
+      new_doctor = Doctor.new(current_name, current_area, current_ins, current_id)
       doctors << new_doctor
     end
     doctors
   end
 
   def ==(another_doctor)
-    (self.name == another_doctor.name) && (self.area == another_doctor.area) && (self.id == another_doctor.id)
+    (self.name == another_doctor.name) && (self.area == another_doctor.area) && (self.ins == another_doctor.ins) && (self.id == another_doctor.id)
   end
 
   def add_patient(patient)

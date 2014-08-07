@@ -13,7 +13,7 @@ class Area
 
   def self.all
     areas = []
-    results = DB.exec('SELECT * FROM areas;')
+    results = DB.exec("SELECT * FROM areas;")
     results.each do |result|
       result_area = result['name']
       result_id = result['id'].to_i
