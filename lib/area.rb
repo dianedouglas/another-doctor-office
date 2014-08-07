@@ -1,12 +1,8 @@
 require 'table_butler'
 
 class Area < Table_Butler
-  attr_accessor:name, :id
 
-  def initialize(attributes)
-    @name = attributes['name']
-    @id = attributes['id'].to_i
-  end
+  attr_accessor:name, :id
 
   def doctors
     doctors = []

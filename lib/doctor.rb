@@ -2,19 +2,8 @@ require 'pry'
 require 'table_butler'
 
 class Doctor < Table_Butler
+
 attr_accessor:name, :area_id, :id, :ins_id
-
-  def initialize (attributes)
-    @name = attributes['name']
-    @area_id = attributes['area_id'].to_i
-    @id = attributes['id'].to_i
-    @ins_id = attributes['ins_id'].to_i
-  end
-
-  # def save
-  #   results = DB.exec("INSERT INTO doctors (name, area_id, ins_id) VALUES ('#{@name}', '#{@area}', '#{@ins}') RETURNING id;")
-  #   @id = results.first["id"].to_i
-  # end
 
   def add_patient(patient)
     DB.exec("INSERT INTO patients_doctors (patient_id, doctor_id) VALUES ('#{patient.id}', '#{@id}');")

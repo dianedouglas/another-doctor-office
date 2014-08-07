@@ -4,11 +4,6 @@ class Ins < Table_Butler
 
 attr_accessor :name, :id
 
-  def initialize(attributes)
-    @name = attributes['name']
-    @id = attributes['id'].to_i
-  end
-
   def doctors
     doctors = []
     results = DB.exec("SELECT * FROM doctors WHERE ins_id = ('#{@id}');")
