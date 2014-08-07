@@ -4,11 +4,11 @@ require 'table_butler'
 class Doctor < Table_Butler
 attr_accessor:name, :area, :id, :ins
 
-  def initialize (name, area, ins, id = nil)
-    @name = name
-    @area = area
-    @id = id
-    @ins = ins
+  def initialize (attributes)
+    @name = attributes['name']
+    @area = attributes['area_id'].to_i
+    @id = attributes['id'].to_i
+    @ins = attributes['ins_id'].to_i
   end
 
   def save
@@ -29,7 +29,7 @@ attr_accessor:name, :area, :id, :ins
       pat_results.each do |patient|
         patient_name = patient['name']
         patient_birthday = patient['birthday'].split(" ")[0]
-        new_patient = Patient.new(patient_name, patient_birthday, patient_id)
+        new_patient = Patient.new({'name' => patient_name, 'birthday' => patient_birthday, 'id' => patient_id})
         patients << new_patient
       end
     end

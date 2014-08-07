@@ -17,12 +17,12 @@ RSpec.configure do |config|
 end
 
 def create_test_objects
-    @test_ins = Ins.new('Health Cross')
+    @test_ins = Ins.new({'name' => 'Health Cross'})
     @test_ins.save
-    @test_area = Area.new('Time Travel')
+    @test_area = Area.new({'name' => 'Time Travel'})
     @test_area.save
-    @test_doctor = Doctor.new("Dr. Who", @test_area.id, @test_ins.id)
+    @test_doctor = Doctor.new({'name' => "Dr. Who", 'area_id' => @test_area.id, 'ins_id' => @test_ins.id})
     @test_doctor.save
-    @test_patient = Patient.new("Dude", "1999-09-09")
+    @test_patient = Patient.new({'name' => "Dude", 'birthday' => "1999-09-09"})
     @test_patient.save
 end

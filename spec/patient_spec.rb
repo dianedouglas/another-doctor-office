@@ -15,7 +15,7 @@ describe Patient do
   end
 
   it 'should save the patient' do
-    expect(@test_patient.all('patients', Patient.new(nil, nil, nil))).to eq [@test_patient]
+    expect(Patient.all).to eq [@test_patient]
   end
 
 end

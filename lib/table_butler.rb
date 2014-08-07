@@ -1,32 +1,15 @@
 require 'pry'
 class Table_Butler
 
-  def all(table, class_instance)
+  def self.all
+    table_name = self.to_s.downcase + "s"
+    if table_name == "inss"
+      table_name = "ins"
+    end
     class_instances = []
-    results = DB.exec("SELECT * FROM #{table};")
+    results = DB.exec("SELECT * FROM #{table_name};")
     results.each do |result|
-
-      if result["name"] != nil
-        class_instance.name = result["name"]
-      end
-
-      if result["birthday"] != nil
-        class_instance.birthday = result['birthday'].split(" ")[0]
-      end
-
-      if result["area_id"] != nil
-        class_instance.area = result["area_id"].to_i
-      end
-
-      if result["ins_id"] != nil
-        class_instance.ins = result["ins_id"].to_i
-      end
-
-      if result["id"] != nil
-        class_instance.id = result["id"].to_i
-      end
-
-      class_instances << class_instance
+      class_instances << self.new(result)
     end
     class_instances
   end

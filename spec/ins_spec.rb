@@ -14,7 +14,7 @@ describe Ins do
   end
 
   it "saves the company into a list of companies" do
-    expect(@test_ins.all('ins', Ins.new(nil, nil))).to eq [@test_ins]
+    expect(Ins.all).to eq [@test_ins]
   end
 
   it "should return the doctors for a given insurance company" do

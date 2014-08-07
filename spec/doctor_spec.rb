@@ -15,7 +15,7 @@ describe Doctor do
   end
 
   it 'will save the doctor to the doctors database' do
-    expect(@test_doctor.all('doctors', Doctor.new(nil,nil,nil,nil))).to eq [@test_doctor]
+    expect(Doctor.all).to eq [@test_doctor]
   end
 
   it 'will add a patient to the doctor table' do
