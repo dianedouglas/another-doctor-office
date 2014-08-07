@@ -10,8 +10,4 @@ attr_accessor:name, :birthday, :id
     @id = attributes['id'].to_i
   end
 
-  def save
-    results = DB.exec("INSERT INTO patients (name, birthday) VALUES ('#{@name}', '#{@birthday}') RETURNING id;")
-    @id = results.first["id"].to_i
-  end
 end

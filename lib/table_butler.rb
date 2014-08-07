@@ -18,7 +18,7 @@ class Table_Butler
     end
     values = values.slice(0, values.length - 2)
     columns = columns.slice(0, columns.length - 2)
-    # columns = DB.exec("\\d doctors;")
+
     results = DB.exec("INSERT INTO #{table_name} (#{columns}) VALUES (#{values}) RETURNING id;")
 
     @id = results.first["id"].to_i

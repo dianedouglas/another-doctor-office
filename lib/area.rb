@@ -8,11 +8,6 @@ class Area < Table_Butler
     @id = attributes['id'].to_i
   end
 
-  def save
-    results = DB.exec("INSERT INTO areas (name) VALUES ('#{@name}') RETURNING id;")
-    @id = results.first['id'].to_i
-  end
-
   def doctors
     doctors = []
     results = DB.exec("SELECT * FROM doctors WHERE area_id = ('#{@id}')")

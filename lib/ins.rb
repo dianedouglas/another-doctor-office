@@ -9,11 +9,6 @@ attr_accessor :name, :id
     @id = attributes['id'].to_i
   end
 
-  def save
-    results = DB.exec("INSERT INTO ins (name) VALUES ('#{@name}') RETURNING id;")
-    @id = results.first['id'].to_i
-  end
-
   def doctors
     doctors = []
     results = DB.exec("SELECT * FROM doctors WHERE ins_id = ('#{@id}');")
