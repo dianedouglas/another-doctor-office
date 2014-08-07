@@ -11,7 +11,7 @@ describe Doctor do
 
   it 'should return name and area when asked.' do
     expect(@test_doctor.name).to eq "Dr. Who"
-    expect(@test_doctor.area).to eq @test_area.id
+    expect(@test_doctor.area_id).to eq @test_area.id
   end
 
   it 'will save the doctor to the doctors database' do

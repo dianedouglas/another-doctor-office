@@ -4,6 +4,26 @@ require 'active_support/core_ext/string/inflections'
 
 class Table_Butler
 
+  def save
+    table_name = self.class.to_s.downcase.pluralize
+    values = ""
+    columns = ""
+
+    attributes = self.instance_variables
+    attributes.each do |attribute|
+      if attribute.id2name != '@id'
+        values += "'" + self.instance_variable_get(attribute).to_s + "', "
+        columns += attribute.id2name.slice(1, attribute.length-1) + ", "
+      end
+    end
+    values = values.slice(0, values.length - 2)
+    columns = columns.slice(0, columns.length - 2)
+    # columns = DB.exec("\\d doctors;")
+    results = DB.exec("INSERT INTO #{table_name} (#{columns}) VALUES (#{values}) RETURNING id;")
+
+    @id = results.first["id"].to_i
+  end
+
   def self.all
     table_name = self.to_s.downcase.pluralize
     class_instances = []
